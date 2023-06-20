@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import Image from '../../components/Image';
 import ProductCard from '../../components/ProductCard';
 import ProductsContainer from '../../components/ProductsContainer';
 import CateSearchBar from '../../components/SearchBar/CateSearchBar';
 
-const Category = () => {
+const Category: FC = () => {
     return (
         <div className={''}>
             <div className="w-full bg-white p-1">

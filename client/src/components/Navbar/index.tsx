@@ -32,7 +32,7 @@ const Navbar: FC = () => {
             cursor-pointer"
                     onClick={() => modal.setModal(true)}
                 >
-                    <Button> Đăng nhập </Button>
+                    <Button type="submit"> Đăng nhập </Button>
                 </div>
             </div>
             {modal.modal && (

@@ -1,6 +1,4 @@
 import React, { FC, ReactNode, useState } from 'react';
-import Image from '../../components/Image';
-import { Box, Tab, Tabs } from '@mui/material';
 import ProductCard from '../../components/ProductCard';
 import CateBar from '../../components/CateBar';
 import ProductsContainer from '../../components/ProductsContainer';
@@ -18,7 +16,6 @@ const Home: FC = () => {
 
     return (
         <div className="w-full">
-
             <CateBar
                 title="Sản phẩm khuyến mãi"
                 titleColor="text-[#ff7b01]"

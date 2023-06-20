@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import { publicRoutes } from './routes';
 import { FC, Fragment } from 'react';
@@ -9,8 +9,8 @@ const App: FC = () => {
             <BrowserRouter>
                 <Routes>
                     {publicRoutes.map((route, i) => {
-                        const Page: FC = route.component;
-                        const Layout: any = route.layout ? route.layout : Fragment;
+                        const Page = route.component;
+                        const Layout = route.layout ? route.layout : Fragment;
                         return (
                             <Route
                                 key={i}
@@ -20,9 +20,10 @@ const App: FC = () => {
                                         <Page />
                                     </Layout>
                                 }
-                            ></Route>
+                            />
                         );
                     })}
+                    <Route path="/admin" element={<Navigate to={'/admin/products'} />} />
                 </Routes>
             </BrowserRouter>
         </div>

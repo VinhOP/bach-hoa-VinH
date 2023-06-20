@@ -25,7 +25,7 @@ const ProductCard: FC<Props> = ({ img, title, price, oldPrice, discount }) => {
                     <p className="font-semibold text-white">25%</p>
                 </div>
             </div>
-            <button className="py-[10px] mt-[30px] text-center w-full border-lime-500 border rounded-md">
+            <button className="py-[10px] mt-[30px] text-cen ter w-full border-lime-500 border rounded-md">
                 Chọn mua
             </button>
         </div>

@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useContext, useState } from 'react';
 import { createContext } from 'react';
 
-interface Props {
+interface IModalContextProps {
     children: ReactNode;
 }
 
@@ -19,7 +19,7 @@ const ModalContext = createContext<IModal>(value);
 
 export const useModal = () => useContext(ModalContext);
 
-const ModalProvider: FC<Props> = ({ children }) => {
+const ModalProvider: FC<IModalContextProps> = ({ children }) => {
     const [modal, setModal] = useState<boolean>(false);
 
     return <ModalContext.Provider value={{ modal, setModal }}>{children}</ModalContext.Provider>;

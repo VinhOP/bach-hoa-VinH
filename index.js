@@ -1,24 +1,25 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
+const productRouter = require("./routes/products");
+const categoryRouter = require("./routes/category");
+const morgan = require("morgan");
 const app = express();
-
-const PORT = process.env.PORT || 5000;
-app.use(bodyParser.json());
 
 require("dotenv").config();
 
 mongoose.connect(process.env.ATLAS_URI);
+require("./models/products");
 
-const productsSchemas = mongoose.Schema({
-  name: String,
-  image: String,
-  countInStocks: Number,
-});
+//.env variables
+const PORT = process.env.PORT || 3000;
+const api = process.env.API_URL;
 
-const Product = mongoose.model("Product", productsSchemas);
-
-//routes
-require("./routes/testRoute")(app, Product);
+console.log(api);
+//middleware
+app.use(bodyParser.json());
+app.use(morgan("tiny"));
+app.use(`${api}/products`, productRouter);
+app.use(`${api}/category`, categoryRouter); 
 
 app.listen(PORT);
