@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styles from './Sidebar.module.scss';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
@@ -55,7 +54,7 @@ const Sidebar = () => {
                 <ul>
                     {categories.map((cate, i) => {
                         return (
-                            <li className="mb-[22px] pl-[7px]">
+                            <li key={i} className="mb-[22px] pl-[7px]">
                                 <div
                                     className={sx('category')}
                                     onClick={() => handleOpenSubMenu(i)}
@@ -76,9 +75,9 @@ const Sidebar = () => {
                                 </div>
                                 {cate.children &&
                                     selectedCate === i &&
-                                    cate.children.map((subCate) => {
+                                    cate.children.map((subCate, i) => {
                                         return (
-                                            <div className="py-[6px] pr-[7px] pl-[10px]">
+                                            <div key={i} className="py-[6px] pr-[7px] pl-[10px]">
                                                 <p
                                                     className="text-xs text-[#1d1d1d] whitespace-nowrap
                                                 text-ellipsis overflow-hidden"

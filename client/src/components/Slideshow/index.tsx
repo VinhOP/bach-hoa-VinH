@@ -9,9 +9,9 @@ const Slideshow = () => {
     return (
         <div className="flex w-full justify-center mt-20 py-1 bg-white">
             <Carousel showThumbs={false} autoPlay infiniteLoop>
-                {images.map((image) => {
+                {images.map((image, i) => {
                     return (
-                        <div className="h-[200px]">
+                        <div key={i} className="h-[200px]">
                             <img
                                 className="w-full h-full object-contain"
                                 src={image.src}

@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Image from '../../components/Image';
 import { Thumbs } from 'react-responsive-carousel';
+import { Outlet } from 'react-router-dom';
 
 interface Props {
     children?: ReactNode;
@@ -46,7 +47,7 @@ const DefaultLayout: FC<Props> = ({ children }) => {
                         </li>
                     </ul>
                 </div>
-                {children}
+                <Outlet />
             </aside>
         </div>
     );

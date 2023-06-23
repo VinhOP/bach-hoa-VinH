@@ -1,9 +1,7 @@
-import { ComponentType, FC, ReactElement } from 'react';
+import { FC } from 'react';
 import { AdminLayout, DefaultLayout } from '../layouts';
-import { Category, Home, AdminProducts, Error } from '../pages';
+import { Category, Home, Error, AdminCategory, AdminProducts } from '../pages';
 import AddProducts from '../pages/Admin/AddProducts';
-import ProductsType from '../pages/Admin/ProductsType';
-import { Navigate } from 'react-router-dom';
 
 interface IRoutes {
     path: string;
@@ -25,12 +23,12 @@ export const publicRoutes: IRoutes[] = [
     },
     {
         path: '/admin/products',
-        component: AdminProducts,
+        component: AdminCategory,
         layout: AdminLayout,
     },
     {
-        path: '/admin/products/mi-goi',
-        component: ProductsType,
+        path: '/admin/products/:product',
+        component: AdminProducts,
         layout: AdminLayout,
     },
     {

@@ -20,6 +20,6 @@ console.log(api);
 app.use(bodyParser.json());
 app.use(morgan("tiny"));
 app.use(`${api}/products`, productRouter);
-app.use(`${api}/category`, categoryRouter); 
+app.use(`${api}/category`, categoryRouter);
 
 app.listen(PORT);
