@@ -9,15 +9,13 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    <React.StrictMode>
-        <AdminProvider>
-            <ModalProvider>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </ModalProvider>
-        </AdminProvider>
-    </React.StrictMode>,
+    <AdminProvider>
+        <ModalProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ModalProvider>
+    </AdminProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

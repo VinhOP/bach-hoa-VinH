@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Button } from '../../../components';
 import { useModal } from '../../../contexts/ModalContext';
-import AddProducts from '../AddProducts';
+import AddProducts from '../Modal/AddProducts';
 import Modal from '../../../components/Modal';
 
-const ProductsType: FC = () => {
+const Products: FC = () => {
     const modal = useModal();
     return (
         <>
@@ -21,13 +21,12 @@ const ProductsType: FC = () => {
                         </div>
                     </li>
                 </ul>
-                <div className="flex justify-center">
-                    <div
-                        className="w-44 bg-lime-400 border rounded m-4"
-                        onClick={() => modal.setModal(true)}
-                    >
-                        <Button> Thêm sản phẩm </Button>
-                    </div>
+
+                <div
+                    className="w-44 mx-auto bg-lime-400 border rounded m-4"
+                    onClick={() => modal.setModal(true)}
+                >
+                    <Button> Thêm </Button>
                 </div>
             </div>
             {modal.modal && (
@@ -39,4 +38,4 @@ const ProductsType: FC = () => {
     );
 };
 
-export default ProductsType;
+export default Products;
