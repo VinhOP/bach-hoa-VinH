@@ -1,13 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Popper from '../../../../components/Popper';
 import { useModal } from '../../../../contexts/ModalContext';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faXmark } from '@fortawesome/free-solid-svg-icons';
 import InputForm from '../../../../components/InputForm';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { Button } from '../../../../components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addCategory } from '../../../../features/category/categorySlice';
+import { useState } from 'react';
 
 interface ICategoryFormInput {
     name: string;
@@ -16,6 +19,9 @@ interface ICategoryFormInput {
 
 const AddCategory = () => {
     const modal = useModal();
+    const [isLoading, setIsLoading] = useState<Boolean>(false);
+
+    const dispatch = useDispatch();
 
     const schema = yup.object().shape({
         name: yup.string().required('Tên không được bỏ trống'),
@@ -30,7 +36,7 @@ const AddCategory = () => {
             .required(),
     });
 
-    const { register, handleSubmit } = useForm<ICategoryFormInput>({
+    const { register, handleSubmit, reset } = useForm<ICategoryFormInput>({
         resolver: yupResolver(schema),
     });
 
@@ -38,11 +44,14 @@ const AddCategory = () => {
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('image', data.image[0]);
-
         try {
+            setIsLoading(true);
             const res = await axios.post('/admin/api', formData);
-            console.log(res);
+            dispatch(addCategory(res.data.category));
+            setIsLoading(false);
+            reset();
         } catch (err) {
+            setIsLoading(false);
             console.log(err);
         }
     };
@@ -74,9 +83,17 @@ const AddCategory = () => {
                     <div className="w-fit">
                         <InputForm type="file" label="Hình ảnh bìa" {...register('image')} />
                     </div>
-                    <div className="bg-lime-400 rounded-md mx-auto my-8 w-[400px]">
+                    <div
+                        className={`${
+                            isLoading ? 'bg-gray-400 pointer-events-none ' : 'bg-lime-400'
+                        } rounded-md mx-auto my-8 w-[400px]`}
+                    >
                         <Button type="submit">
-                            <p className="text-lg">Thêm</p>
+                            {isLoading ? (
+                                <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+                            ) : (
+                                <p>Thêm</p>
+                            )}
                         </Button>
                     </div>
                 </form>

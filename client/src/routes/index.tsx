@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { AdminLayout, DefaultLayout } from '../layouts';
 import { Category, Home, Error } from '../pages';
 import { AdminCategory, AdminProducts, AdminAddProducts } from '../pages/Admin';
+import Product from '../pages/Product';
 
 interface IRoutes {
     path: string;
@@ -19,6 +20,11 @@ export const publicRoutes: IRoutes[] = [
     {
         path: '/:category',
         component: Category,
+        layout: DefaultLayout,
+    },
+    {
+        path: '/:category/:product',
+        component: Product,
         layout: DefaultLayout,
     },
     {

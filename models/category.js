@@ -1,9 +1,15 @@
 const mongoose = require("mongoose");
 
-const categorySchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  name: String,
-  _image: { type: mongoose.Schema.Types.ObjectId, ref: "Image" },
-});
+const categorySchema = mongoose.Schema(
+  {
+    name: String,
+    image: {
+      name: String,
+      url: String,
+      size: Number,
+    },
+  },
+  { timestamps: true }
+);
 
 exports.Category = mongoose.model("Category", categorySchema);
