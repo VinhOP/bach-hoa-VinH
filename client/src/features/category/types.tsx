@@ -1,4 +1,5 @@
 export interface ICategoriesState {
+    _id: string;
     name: string;
     image: {
         name: string;

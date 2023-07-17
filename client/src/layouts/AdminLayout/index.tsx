@@ -6,9 +6,7 @@ import { Outlet } from 'react-router-dom';
 interface IAdminLayoutProps {
     children?: ReactNode;
 }
-const AdminLayout: FC<IAdminLayoutProps> = ({ children }) => {
-    const props = {};
-
+const AdminLayout: FC<IAdminLayoutProps> = () => {
     return (
         <div className="flex h-[800px] min-h-[600px] min-w-[800px]">
             <div className="min-w-[260px] bg-lime-600 h-full fixed">
@@ -21,7 +19,7 @@ const AdminLayout: FC<IAdminLayoutProps> = ({ children }) => {
             </div>
             <div className="flex flex-col items-center w-full ml-[260px]">
                 <div
-                    className="fixed top-0 bg-white left-[260px] right-0 h-[70px]
+                    className="fixed top-0 z-40  bg-white left-[260px] right-0 h-[70px]
                 flex items-center justify-center border-b-2"
                 >
                     <h1 className="text-center font-bold text-4xl"> Quản lý sản phẩm </h1>

@@ -1,5 +1,5 @@
-import { default as AdminCategory } from './Category';
+import { default as AdminCategories } from './Categories';
 import { default as AdminProducts } from './Products';
 import { default as AdminAddProducts } from './Modal/AddProducts';
 
-export { AdminCategory, AdminProducts, AdminAddProducts };
+export { AdminCategories, AdminProducts, AdminAddProducts };

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import Popper from '../../../components/Popper';
 import ProductsContainer from '../../../components/ProductsContainer';
 import Image from '../../../components/Image';
@@ -10,24 +10,30 @@ import AddCategory from '../Modal/AddCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsis, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import useFetch from '../../../hooks/useFetch';
 import { setCategories, setIsLoading } from '../../../features/category/categorySlice';
 import axios from 'axios';
+import Category from './Category';
 
 const Admin: FC = () => {
     const modal = useModal();
-    const { value } = useSelector((state: RootState) => state.category);
-    const [isLoading, setIsLoading] = useState<Boolean>(false);
+    const { value, isLoading } = useSelector((state: RootState) => state.category);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            setIsLoading(true);
-            const res = await axios.get('/admin/api');
+    const controller = new AbortController();
+    const fetchCategories = useCallback(async () => {
+        try {
+            dispatch(setIsLoading(true));
+            const res = await axios.get('/admin/api', { signal: controller.signal });
             dispatch(setCategories(res.data));
-            setIsLoading(false);
-        };
+            dispatch(setIsLoading(false));
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+
+    useLayoutEffect(() => {
         fetchCategories();
     }, []);
 
@@ -42,21 +48,12 @@ const Admin: FC = () => {
                     <ProductsContainer className="min-w-[1000px] w-full">
                         {value.length > 0 &&
                             value.map((category, i) => {
-                                const productPath = category.name.replace(/ /g, '-');
-
                                 return (
-                                    <li
+                                    <Category
+                                        category={category}
                                         key={i}
-                                        className="flex flex-col justify-center items-center w-fit cursor-pointer"
-                                    >
-                                        <Link to={productPath} className="w-64 h-36 p-1">
-                                            <Image
-                                                src={category.image.url}
-                                                className="rounded-sm"
-                                            />
-                                        </Link>
-                                        <p>{category.name}</p>
-                                    </li>
+                                        fetchCategories={fetchCategories}
+                                    />
                                 );
                             })}
                     </ProductsContainer>

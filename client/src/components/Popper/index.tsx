@@ -6,7 +6,9 @@ interface IPopperProps {
 }
 
 const Popper: FC<IPopperProps> = ({ children, className }) => {
-    return <div className={`w- h-full bg-white shadow-md rounded-md ${className}`}>{children}</div>;
+    return (
+        <div className={`w-full h-full bg-white shadow-md rounded-md ${className}`}>{children}</div>
+    );
 };
 
 export default Popper;

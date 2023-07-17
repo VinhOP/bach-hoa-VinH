@@ -15,7 +15,7 @@ const path = require("path");
 const upload = multer();
 
 router.get("/api", async (req, res) => {
-  const categories = await Category.find({}, "-_id -__v");
+  const categories = await Category.find({}, "-__v");
 
   res.send(categories);
 });
@@ -33,6 +33,7 @@ router.post("/api", upload.single("image"), async (req, res) => {
       storage,
       `category/${Date.now() + path.extname(req.file.originalname)}` // định nghĩa tên file trong storage
     );
+
     const imageData = await uploadBytes(imageRef, req.file.buffer); // upload ảnh lên cloud
     const imageURL = await getDownloadURL(imageRef); // lấy link download của ảnh
 
@@ -55,6 +56,22 @@ router.post("/api", upload.single("image"), async (req, res) => {
   } catch (err) {
     console.log(imageRef);
     res.send(err);
+  }
+});
+
+router.delete("/api/:category_id", async (req, res) => {
+  const category = await Category.findByIdAndDelete(req.params.category_id);
+  res.send({ message: "Xóa category thành công" });
+});
+
+router.delete("/api/image/:image_name", async (req, res) => {
+  const imageRef = ref(storage, `category/${req.params.image_name}`);
+
+  try {
+    const deleteImg = await deleteObject(imageRef);
+    res.send({ message: "Xóa ảnh thành công" });
+  } catch (err) {
+    console.log(err);
   }
 });
 

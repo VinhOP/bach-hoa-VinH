@@ -16,7 +16,7 @@ const App: FC = () => {
                         </Route>
                     );
                 })}
-                <Route path="/admin" element={<Navigate to={'/admin/products'} />} />
+                <Route path="/admin" element={<Navigate to={'/admin/category'} />} />
             </Routes>
         </div>
     );
