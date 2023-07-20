@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { AdminLayout, DefaultLayout } from '../layouts';
 import { Category, Home, Error } from '../pages';
-import { AdminCategories, AdminProducts, AdminAddProducts } from '../pages/Admin';
+import { AdminCategories, AdminProducts } from '../pages/Admin';
 import Product from '../pages/Product';
 
 interface IRoutes {

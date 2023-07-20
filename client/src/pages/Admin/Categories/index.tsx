@@ -1,8 +1,6 @@
-import { FC, useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { FC, useCallback, useLayoutEffect } from 'react';
 import Popper from '../../../components/Popper';
 import ProductsContainer from '../../../components/ProductsContainer';
-import Image from '../../../components/Image';
-import { Link } from 'react-router-dom';
 import { Button } from '../../../components';
 import Modal from '../../../components/Modal';
 import { useModal } from '../../../contexts/ModalContext';
@@ -10,12 +8,10 @@ import AddCategory from '../Modal/AddCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import useFetch from '../../../hooks/useFetch';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { setCategories, setIsLoading } from '../../../features/category/categorySlice';
-import axios from 'axios';
 import Category from './Category';
-import { getCategory } from '../../../services/categoryService';
+import { getCategoryRequest } from '../../../services/categoryService';
 
 const Admin: FC = () => {
     const modal = useModal();
@@ -25,10 +21,8 @@ const Admin: FC = () => {
     const fetchCategories = useCallback(async () => {
         try {
             dispatch(setIsLoading(true));
-            const res = await getCategory();
-            console.log(res);
-
-            // dispatch(setCategories(res.data));
+            const res = await getCategoryRequest();
+            dispatch(setCategories(res));
             dispatch(setIsLoading(false));
         } catch (err) {
             console.log(err);

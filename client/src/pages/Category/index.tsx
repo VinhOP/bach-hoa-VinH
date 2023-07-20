@@ -3,7 +3,6 @@ import Image from '../../components/Image';
 import ProductCard from '../../components/ProductCard';
 import ProductsContainer from '../../components/ProductsContainer';
 import CateSearchBar from '../../components/SearchBar/CateSearchBar';
-import { Button } from '../../components';
 
 const Category: FC = () => {
     return (

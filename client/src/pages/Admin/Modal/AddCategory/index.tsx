@@ -7,10 +7,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { Button } from '../../../../components';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addCategory } from '../../../../features/category/categorySlice';
 import { useState } from 'react';
+import { addCategoryRequest } from '../../../../services/categoryService';
 
 interface ICategoryFormInput {
     name: string;
@@ -46,8 +46,8 @@ const AddCategory = () => {
         formData.append('image', data.image[0]);
         try {
             setIsLoading(true);
-            const res = await axios.post('/admin/api', formData);
-            dispatch(addCategory(res.data.category));
+            const category = await addCategoryRequest(formData);
+            dispatch(addCategory(category));
             setIsLoading(false);
             reset();
         } catch (err) {

@@ -1,19 +1,9 @@
-import React, { FC, ReactNode, useState } from 'react';
+import { FC } from 'react';
 import ProductCard from '../../components/ProductCard';
 import CateBar from '../../components/CateBar';
 import ProductsContainer from '../../components/ProductsContainer';
 
-interface Props {
-    children?: ReactNode;
-}
-
 const Home: FC = () => {
-    // const [value, setValue] = React.useState(0);
-
-    // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    //     setValue(newValue);
-    // };
-
     return (
         <div className="w-full">
             <CateBar

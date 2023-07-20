@@ -54,22 +54,23 @@ router.post("/api", upload.single("image"), async (req, res) => {
       category: category,
     });
   } catch (err) {
-    console.log(imageRef);
     res.send(err);
   }
 });
 
 router.delete("/api/:category_id", async (req, res) => {
-  const category = await Category.findByIdAndDelete(req.params.category_id);
-  res.send({ message: "Xóa category thành công" });
+  const deletedCategory = await Category.findByIdAndDelete(
+    req.params.category_id
+  );
+  res.send({ message: "Xóa category thành công", category: deletedCategory });
 });
 
 router.delete("/api/image/:image_name", async (req, res) => {
   const imageRef = ref(storage, `category/${req.params.image_name}`);
 
   try {
-    const deleteImg = await deleteObject(imageRef);
-    res.send({ message: "Xóa ảnh thành công" });
+    const deletedImg = await deleteObject(imageRef);
+    res.send({ message: "Xóa ảnh thành công", image: deletedImg });
   } catch (err) {
     console.log(err);
   }

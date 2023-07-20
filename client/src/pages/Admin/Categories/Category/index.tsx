@@ -4,10 +4,12 @@ import Popper from '../../../../components/Popper';
 import { Link } from 'react-router-dom';
 import Image from '../../../../components/Image';
 import { useState } from 'react';
-import axios from 'axios';
-import { Modal } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setIsLoading } from '../../../../features/category/categorySlice';
+import {
+    deleteCategoryImgRequest,
+    deleteCategoryRequest,
+} from '../../../../services/categoryService';
 
 interface ICategoryProps {
     category: {
@@ -39,8 +41,10 @@ const Category = ({ category, fetchCategories }: ICategoryProps) => {
     const handleDeleteCategory = async (category: ICategoryToDelete) => {
         dispatch(setIsLoading(true));
         try {
-            const deleteCate = await axios.delete(`/admin/api/${category._id}`);
-            const deleteCateImg = await axios.delete(`/admin/api/image/${category.image.name}`);
+            const deleteCate = await deleteCategoryRequest(category._id);
+            const deleteCateImg = await deleteCategoryImgRequest(category.image.name);
+            console.log('category deleted:', deleteCate);
+            console.log('image deleted:', deleteCateImg);
             fetchCategories();
         } catch (err) {
             dispatch(setIsLoading(false));
