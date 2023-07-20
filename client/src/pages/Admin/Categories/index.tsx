@@ -15,18 +15,20 @@ import useFetch from '../../../hooks/useFetch';
 import { setCategories, setIsLoading } from '../../../features/category/categorySlice';
 import axios from 'axios';
 import Category from './Category';
+import { getCategory } from '../../../services/categoryService';
 
 const Admin: FC = () => {
     const modal = useModal();
     const { value, isLoading } = useSelector((state: RootState) => state.category);
     const dispatch = useDispatch();
 
-    const controller = new AbortController();
     const fetchCategories = useCallback(async () => {
         try {
             dispatch(setIsLoading(true));
-            const res = await axios.get('/admin/api', { signal: controller.signal });
-            dispatch(setCategories(res.data));
+            const res = await getCategory();
+            console.log(res);
+
+            // dispatch(setCategories(res.data));
             dispatch(setIsLoading(false));
         } catch (err) {
             console.log(err);
