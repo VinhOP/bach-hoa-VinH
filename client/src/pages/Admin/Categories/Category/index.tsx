@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Image from '../../../../components/Image';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setIsLoading } from '../../../../features/category/categorySlice';
+import { deleteCategory, setIsLoading } from '../../../../features/category/categorySlice';
 import {
     deleteCategoryImgRequest,
     deleteCategoryRequest,
@@ -41,11 +41,11 @@ const Category = ({ category, fetchCategories }: ICategoryProps) => {
     const handleDeleteCategory = async (category: ICategoryToDelete) => {
         dispatch(setIsLoading(true));
         try {
-            const deleteCate = await deleteCategoryRequest(category._id);
-            const deleteCateImg = await deleteCategoryImgRequest(category.image.name);
-            console.log('category deleted:', deleteCate);
-            console.log('image deleted:', deleteCateImg);
-            fetchCategories();
+            const deletedCate = await deleteCategoryRequest(category._id);
+            const deletedCateImg = await deleteCategoryImgRequest(category.image.name);
+
+            dispatch(deleteCategory(deletedCate.category._id));
+            dispatch(setIsLoading(false));
         } catch (err) {
             dispatch(setIsLoading(false));
             console.log(err);

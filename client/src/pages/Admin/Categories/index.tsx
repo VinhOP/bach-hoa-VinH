@@ -1,4 +1,4 @@
-import { FC, useCallback, useLayoutEffect } from 'react';
+import { FC, useCallback, useEffect, useLayoutEffect } from 'react';
 import Popper from '../../../components/Popper';
 import ProductsContainer from '../../../components/ProductsContainer';
 import { Button } from '../../../components';
@@ -34,26 +34,33 @@ const Admin: FC = () => {
     }, []);
 
     return (
-        <div className="bg-blue-50 w-full">
+        <div className="bg-blue-50 w-full relative">
+            {isLoading && (
+                <div className="absolute inset-0 bg-gray-200 z-30 opacity-40">
+                    <div className="absolute text-3xl top-1/2 left-1/2">
+                        <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+                    </div>
+                </div>
+            )}
             <Popper className="p-4">
-                {isLoading ? (
+                {/* {isLoading ? (
                     <div className="w-full my-8 flex justify-center text-3xl">
                         <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
                     </div>
-                ) : (
-                    <ProductsContainer className="min-w-[1000px] w-full">
-                        {value.length > 0 &&
-                            value.map((category, i) => {
-                                return (
-                                    <Category
-                                        category={category}
-                                        key={i}
-                                        fetchCategories={fetchCategories}
-                                    />
-                                );
-                            })}
-                    </ProductsContainer>
-                )}
+                ) : ( */}
+                <ProductsContainer className="min-w-[1000px] w-full">
+                    {value.length > 0 &&
+                        value.map((category, i) => {
+                            return (
+                                <Category
+                                    category={category}
+                                    key={i}
+                                    fetchCategories={fetchCategories}
+                                />
+                            );
+                        })}
+                </ProductsContainer>
+                {/* )} */}
 
                 <div
                     className="w-44 mx-auto my-8 bg-lime-400 border rounded m-4"

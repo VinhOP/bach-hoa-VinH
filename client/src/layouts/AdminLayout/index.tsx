@@ -24,7 +24,7 @@ const AdminLayout: FC<IAdminLayoutProps> = () => {
                 >
                     <h1 className="text-center font-bold text-4xl"> Quản lý sản phẩm </h1>
                 </div>
-                <div className="w-full h-[600px] flex justify-center mt-24">
+                <div className="w-full h-[600px] flex justify-center mt-[70px]">
                     <Outlet />
                 </div>
             </div>

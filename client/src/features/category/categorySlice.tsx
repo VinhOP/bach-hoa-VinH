@@ -16,11 +16,14 @@ export const categoriesSlice = createSlice({
         addCategory: (state, action: PayloadAction<ICategoriesState>) => {
             state.value.push(action.payload);
         },
+        deleteCategory: (state, action: PayloadAction<string>) => {
+            state.value = state.value.filter((cate) => cate._id !== action.payload);
+        },
         setIsLoading: (state, action: PayloadAction<boolean>) => {
             state.isLoading = action.payload;
         },
     },
 });
 
-export const { setCategories, setIsLoading, addCategory } = categoriesSlice.actions;
+export const { setCategories, setIsLoading, addCategory, deleteCategory } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
