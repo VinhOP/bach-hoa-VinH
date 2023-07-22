@@ -47,6 +47,8 @@ const AddCategory = () => {
         try {
             setIsLoading(true);
             const category = await addCategoryRequest(formData);
+            console.log(category);
+
             dispatch(addCategory(category));
             setIsLoading(false);
             reset();

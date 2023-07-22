@@ -6,10 +6,7 @@ import Image from '../../../../components/Image';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteCategory, setIsLoading } from '../../../../features/category/categorySlice';
-import {
-    deleteCategoryImgRequest,
-    deleteCategoryRequest,
-} from '../../../../services/categoryService';
+import { deleteCloudImgRequest, deleteCategoryRequest } from '../../../../services/categoryService';
 
 interface ICategoryProps {
     category: {
@@ -21,7 +18,6 @@ interface ICategoryProps {
         };
         _id: string;
     };
-    fetchCategories: () => {};
 }
 
 interface ICategoryToDelete {
@@ -34,7 +30,7 @@ interface ICategoryToDelete {
     _id: string;
 }
 
-const Category = ({ category, fetchCategories }: ICategoryProps) => {
+const Category = ({ category }: ICategoryProps) => {
     const [openOption, setOpenOption] = useState<Boolean>(false);
     const dispatch = useDispatch();
 
@@ -42,7 +38,7 @@ const Category = ({ category, fetchCategories }: ICategoryProps) => {
         dispatch(setIsLoading(true));
         try {
             const deletedCate = await deleteCategoryRequest(category._id);
-            const deletedCateImg = await deleteCategoryImgRequest(category.image.name);
+            const deletedCateImg = await deleteCloudImgRequest(category.image.name);
 
             dispatch(deleteCategory(deletedCate.category._id));
             dispatch(setIsLoading(false));

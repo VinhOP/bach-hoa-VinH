@@ -43,21 +43,10 @@ const Admin: FC = () => {
                 </div>
             )}
             <Popper className="p-4">
-                {/* {isLoading ? (
-                    <div className="w-full my-8 flex justify-center text-3xl">
-                        <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
-                    </div>
-                ) : ( */}
                 <ProductsContainer className="min-w-[1000px] w-full">
                     {value.length > 0 &&
                         value.map((category, i) => {
-                            return (
-                                <Category
-                                    category={category}
-                                    key={i}
-                                    fetchCategories={fetchCategories}
-                                />
-                            );
+                            return <Category category={category} key={i} />;
                         })}
                 </ProductsContainer>
                 {/* )} */}

@@ -12,7 +12,7 @@ const app = express();
 require("dotenv").config();
 require("./firebase");
 
-mongoose.connect(process.env.ATLAS_URI);
+require("./connection")();
 require("./models/product");
 
 //.env variables
